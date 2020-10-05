@@ -4,5 +4,6 @@ from . import views
 app_name = 'magic_circle'
 
 urlpatterns = [
-    path('showall/',views.showall, name='showall')
+    path('showall/',views.showall, name='showall'),
+    path('upload/',views.upload, name='upload')
 ]
