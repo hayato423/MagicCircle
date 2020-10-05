@@ -4,6 +4,8 @@ var thicknessSlider;
 var penOrEraserRadio;
 var canvas;
 
+const xhr = new XMLHttpRequest();
+
 function setup() {
     canvas = createCanvas(400, 400);
     frameRate(60);
@@ -23,8 +25,11 @@ function setup() {
     penOrEraserRadio.position(340, 10);
     penOrEraserRadio.selected('pen');
     //保存ボタン
-    const saveButton = createButton('Save');
-    saveButton.mousePressed(save);
+    const uploadButton = createButton('Upload');
+    uploadButton.mousePressed(upload);
+
+    // const setButton = createButton('set');
+    // setButton.mousePressed(set);
     //初期化描画
     initDraw();
 }
@@ -64,6 +69,25 @@ function initDraw() {
     ellipse(width / 2, height / 2, radius * 2, radius * 2);
 }
 
-function save() {
-    saveCanvas(canvas, 'magicCircle', 'jpg');
+function upload() {
+    const canvas = document.getElementById("defaultCanvas0");
+    const image = canvas.toDataURL('image/png');
+    const url = "http://localhost:8000/magic_circle/upload/";
+    let csrftoken = '';
+    const formData = new FormData();
+    const cookies = document.cookie;
+    const cookiesArray = cookies.split(';');
+    for(var c of cookiesArray) {
+        var cArray = c.split('=');
+        if(cArray[0] == 'csrftoken'){
+            csrftoken = cArray[1];
+        }
+    }
+
+    formData.append('picture',image);
+    xhr.open("POST",url);
+    xhr.setRequestHeader('enctype',"multipart/form-data");
+    xhr.setRequestHeader('X-CSRFToken',csrftoken);
+    xhr.send(formData);
 }
+

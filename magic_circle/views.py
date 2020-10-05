@@ -2,6 +2,10 @@ from magic_circle.forms import ImageForm
 from django.shortcuts import render,redirect
 from .models import Image
 from .forms import ImageForm
+
+import base64
+import cv2
+import numpy as np
 # Create your views here.
 
 def showall(request):
@@ -12,12 +16,14 @@ def showall(request):
 
 def upload(request):
     if request.method == "POST":
-        form = ImageForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('magic_circle:showall')
-    else:
-        form = ImageForm()
-
-    context = {'form':form}
-    return render(request,'magic_circle/upload.html',context)
+        data = request.POST['picture'].split(',')
+        print(data[1])
+        img_base64 = data[1]
+        img_binary = base64.b64decode(img_base64)
+        jpg = np.frombuffer(img_binary,dtype=np.uint8)
+        image_file = 'decode.jpg'
+        img = cv2.imdecode(jpg,cv2.IMREAD_COLOR)
+        cv2.imshow('window title',img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    return render(request,'magic_circle/upload.html')
