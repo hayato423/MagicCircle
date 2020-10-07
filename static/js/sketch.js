@@ -28,8 +28,8 @@ function setup() {
     const uploadButton = createButton('Upload');
     uploadButton.mousePressed(upload);
 
-    // const setButton = createButton('set');
-    // setButton.mousePressed(set);
+    const saveButton = createButton('save');
+    saveButton.mousePressed(save);
     //初期化描画
     initDraw();
 }
@@ -59,10 +59,10 @@ function clearCanvas() {
 }
 
 function initDraw() {
-    fill(0);
-    textSize(16);
-    strokeWeight(0);
-    text('太さ', 0, 20);
+    // fill(0);
+    // textSize(16);
+    // strokeWeight(0);
+    // text('太さ', 0, 20);
     strokeWeight(circleThickness);
     noFill();
     stroke(0);
@@ -89,5 +89,15 @@ function upload() {
     xhr.setRequestHeader('enctype',"multipart/form-data");
     xhr.setRequestHeader('X-CSRFToken',csrftoken);
     xhr.send(formData);
+}
+
+
+function save() {
+    const canvas = document.getElementById("defaultCanvas0");
+    const image = canvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = image;
+    a.download = 'canvas.png';
+    a.click();
 }
 

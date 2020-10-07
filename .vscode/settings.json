@@ -1,3 +1,13 @@
 {
-    "python.linting.pylintEnabled": true
+    "python.autoComplete.extraPaths": [
+        "C:\\Users\\hayat\\.virtualenvs\\ShibaLab-NNBfVMY2\\Lib\\site-packages"
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.linting.pylintArgs": [
+        "--extension-pkg-whitelist=cv2",
+        "--load-plugins=pylint_django"
+    ],
+    "python.analysis.extraPaths": [
+        "C:\\Users\\hayat\\.virtualenvs\\ShibaLab-NNBfVMY2\\Lib\\site-packages"
+    ]
 }
