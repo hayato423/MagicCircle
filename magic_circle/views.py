@@ -33,11 +33,30 @@ def ImageProcessing(img):
     diff_img = cv2.absdiff(img_grey,circle_img)
     diff_img = np.float32(diff_img)
     #Harrisのコーナー検出
-    dst = cv2.cornerHarris(diff_img,2,3,0.04)
-    dst = cv2.dilate(dst,None)
-    corner_num = np.sum(dst > 0)
+    dst = detect_corner(diff_img)
     img[dst>0.01*dst.max()] = [0,0,255]
+    #直線検出
+    lines = detect_lines(diff_img)
+    for line in lines:
+        x1, y1, x2, y2 = line[0]
+        cv2.line(img,(x1,y1),(x2,y2),(0,255,0),2)
 
     cv2.imshow('window title',img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+
+def detect_corner(img):
+    dst = cv2.cornerHarris(img,2,3,0.04)
+    dst = cv2.dilate(dst,None)
+    return dst
+
+
+def detect_lines(img):
+    img_uint8 = np.uint8(img)
+    edges = cv2.Canny(img_uint8,0,0)
+    minLineLength = 500
+    maxLineGap = 100
+    lines = cv2.HoughLinesP(edges,1,np.pi/180,100,minLineLength,maxLineGap)
+    return lines
+
