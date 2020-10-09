@@ -11,6 +11,7 @@ pillow = "*"
 opencv-python = "*"
 numpy = "*"
 pylint = "*"
+channels = "*"
 
 [requires]
 python_version = "3.8"

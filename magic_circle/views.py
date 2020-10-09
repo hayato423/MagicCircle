@@ -1,12 +1,14 @@
 from sys import flags
 from magic_circle.forms import ImageForm
 from django.shortcuts import render,redirect
-from .models import Image
+from django.utils import timezone
+from .models import Image, MagicCircle
 from .forms import ImageForm
 
 import base64
 import cv2
 import numpy as np
+import datetime
 # Create your views here.
 
 def showall(request):
@@ -24,6 +26,8 @@ def upload(request):
         img = cv2.imdecode(jpg,cv2.IMREAD_COLOR)
         parameter = get_parameter(img)
         print(parameter)
+        mc = MagicCircle(corner=parameter[0],line=parameter[1],circle=parameter[2],date_time=timezone.now())
+        mc.save()
     return render(request,'magic_circle/upload.html')
 
 
