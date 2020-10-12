@@ -1,12 +1,13 @@
 from sys import flags
-from magic_circle.forms import ImageForm
 from django.shortcuts import render,redirect
-from .models import Image
-from .forms import ImageForm
+from django.utils import timezone
 
 import base64
 import cv2
 import numpy as np
+import datetime
+from .udp_client import udpsend
+
 # Create your views here.
 
 def showall(request):
@@ -23,7 +24,12 @@ def upload(request):
         jpg = np.frombuffer(img_binary,dtype=np.uint8)
         img = cv2.imdecode(jpg,cv2.IMREAD_COLOR)
         parameter = get_parameter(img)
-        print(parameter)
+        data = ''
+        for p in parameter:
+            data = data + str(p) + ','
+        data = data + str(img_base64)
+        udp = udpsend()
+        udp.send(data=data)
     return render(request,'magic_circle/upload.html')
 
 
