@@ -37,6 +37,9 @@ def get_parameter(img):
     circle_img_path = "D:\DjangoProject\ShibaLab\media\images\circle.png"
     circle_img = cv2.imread(circle_img_path,0)
     img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img_grey = cv2.resize(img_grey,(int(img_grey.shape[1]*0.5),int(img_grey.shape[0]*0.5)))
+    print(img_grey.shape)
+    print(circle_img.shape)
     diff_img = cv2.absdiff(img_grey,circle_img)
     diff_img = np.float32(diff_img)
     #Harrisのコーナー検出
@@ -55,7 +58,7 @@ def get_parameter(img):
     if circles is not None and len(circles) > 0:
         circles_num = len(circles[0])
 
-    #画像描画
+    # # 画像描画
     # img[corners] = [0,0,255]
     # if lines is not None and len(lines) > 0:
     #     for line in lines:

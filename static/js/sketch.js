@@ -72,7 +72,7 @@ function initDraw() {
 function upload() {
     const canvas = document.getElementById("defaultCanvas0");
     const image = canvas.toDataURL('image/png');
-    const url = "http://localhost:8000/magic_circle/upload/";
+    const url = "http://192.168.0.123:8000/magic_circle/upload/";
     let csrftoken = '';
     const formData = new FormData();
     const cookies = document.cookie;
