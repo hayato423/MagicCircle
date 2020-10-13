@@ -1,4 +1,4 @@
-const radius = 150;
+const radius = 245;
 const circleThickness = 10;
 var thicknessSlider;
 var penOrEraserRadio;
@@ -7,29 +7,32 @@ var canvas;
 const xhr = new XMLHttpRequest();
 
 function setup() {
-    canvas = createCanvas(400, 400);
+    let canvas = createCanvas(500,500);
+    canvas.parent('canvas');
     frameRate(60);
     background(255);
     //全消去ボタン
-    const clearButton = createButton("リセット");
+    const clearButton = createButton("reset");
     clearButton.mousePressed(clearCanvas);
-    clearButton.position(0, 40);
+    // clearButton.position(0, 40);
+    clearButton.parent('reset');
     //太さスライダー
     thicknessSlider = createSlider(0, 10, 5);
-    thicknessSlider.position(50, 15);
+    // thicknessSlider.position(50, 15);
+    thicknessSlider.parent('slider');
     //ラジオボタン
     penOrEraserRadio = createRadio();
     penOrEraserRadio.option('pen');
     penOrEraserRadio.option('eraser');
-    penOrEraserRadio.style('width', '70px');
-    penOrEraserRadio.position(340, 10);
+    penOrEraserRadio.style('width', '100px');
+    // penOrEraserRadio.position(340, 10);
     penOrEraserRadio.selected('pen');
+    penOrEraserRadio.parent('option');
     //保存ボタン
     const uploadButton = createButton('Upload');
     uploadButton.mousePressed(upload);
+    uploadButton.parent('upload');
 
-    const saveButton = createButton('save');
-    saveButton.mousePressed(save);
     //初期化描画
     initDraw();
 }
@@ -94,7 +97,7 @@ function upload() {
 
 function save() {
     const canvas = document.getElementById("defaultCanvas0");
-    const image = canvas.toDataURL('image/png');
+    const image = canvas.toDataURL('image/jpg');
     const a = document.createElement('a');
     a.href = image;
     a.download = 'canvas.png';
