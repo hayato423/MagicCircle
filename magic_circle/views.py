@@ -23,20 +23,20 @@ def upload(request):
         rcv_img_binary = base64.b64decode(rcv_img_base64)
         jpg = np.frombuffer(rcv_img_binary,dtype=np.uint8)
         img = cv2.imdecode(jpg,cv2.IMREAD_GRAYSCALE)
-        img_resized = cv2.resize(img,(400,400))
+        img_resized = cv2.resize(img,(500,500))
         parameter = get_parameter(img_resized)
         data = ''
         for p in parameter:
             data = data + str(p) + ','
         data = data + str(rcv_img_base64)
-        print(data[:30])
+        print(parameter)
         udp = udpsend()
         udp.send(data=data)
     return render(request,'magic_circle/upload.html')
 
 
 def get_parameter(img):
-    circle_img_path = "D:\DjangoProject\ShibaLab\media\images\circle.png"
+    circle_img_path = "D:\DjangoProject\ShibaLab\media\images\circle2.png"
     circle_img = cv2.imread(circle_img_path,0)
     #img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     print(img.shape)
@@ -74,8 +74,8 @@ def get_parameter(img):
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
-    lines_num = int(lines_num / 2)
-    corners_num = int(corners_num/8 - lines_num)
+    # lines_num = lines_num
+    # corners_num = int(corners_num/8 - lines_num)
     parameter = [corners_num, lines_num, circles_num]
     return parameter
 

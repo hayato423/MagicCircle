@@ -10,7 +10,7 @@ function setup() {
     let canvas = createCanvas(500,500);
     canvas.parent('canvas');
     frameRate(60);
-    background(255);
+    background(0);
     //全消去ボタン
     const clearButton = createButton("reset");
     clearButton.mousePressed(clearCanvas);
@@ -47,9 +47,9 @@ function draw() {
         if (mouseDistance <= radiusDistance && pmouseDistance <= radiusDistance) {
             strokeWeight(thicknessSlider.value());
             if (penOrEraserRadio.value() == 'pen') {
-                stroke(0);
-            } else {
                 stroke(255);
+            } else {
+                stroke(0);
             }
             line(pmouseX, pmouseY, mouseX, mouseY);
         }
@@ -57,7 +57,7 @@ function draw() {
 }
 
 function clearCanvas() {
-    background(255);
+    background(0);
     initDraw();
 }
 
@@ -68,7 +68,7 @@ function initDraw() {
     // text('太さ', 0, 20);
     strokeWeight(circleThickness);
     noFill();
-    stroke(0);
+    stroke(255);
     ellipse(width / 2, height / 2, radius * 2, radius * 2);
 }
 
