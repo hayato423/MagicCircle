@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 
 <head>
+    {% load static %}
     <meta charset="utf-8">
+    <link rel="stylesheet" href={% static 'css/style.css' %}>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+    <script src={% static 'js/sketch.js' %}></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
 <body>
-    {% load static %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
-    <script src={% static 'js/sketch.js' %}></script>
-    <form enctype="multipart/form-data" action="{% url 'magic_circle:upload' %}" method="POST">
-        {% csrf_token %}
-        <!-- {{form.as_p}} -->
-        <!-- <input type="submit" value="upload"> -->
-    </form>
+    {%csrf_token%}
+    <div class="container" id="myContainer">
+        <h1>MagicCircle</h1>
+        <div id="canvas"></div>
+        <div id="slider"></div>
+        <div id="reset"></div>
+        <div id="option"></div>
+        <div id="upload""></div>
+    </div>
 </body>

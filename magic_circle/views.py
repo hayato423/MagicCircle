@@ -19,25 +19,29 @@ def showall(request):
 def upload(request):
     if request.method == "POST":
         data = request.POST['picture'].split(',')
-        img_base64 = data[1]
-        img_binary = base64.b64decode(img_base64)
-        jpg = np.frombuffer(img_binary,dtype=np.uint8)
-        img = cv2.imdecode(jpg,cv2.IMREAD_COLOR)
-        parameter = get_parameter(img)
+        rcv_img_base64 = data[1]
+        rcv_img_binary = base64.b64decode(rcv_img_base64)
+        jpg = np.frombuffer(rcv_img_binary,dtype=np.uint8)
+        img = cv2.imdecode(jpg,cv2.IMREAD_GRAYSCALE)
+        img_resized = cv2.resize(img,(500,500))
+        parameter = get_parameter(img_resized)
         data = ''
         for p in parameter:
             data = data + str(p) + ','
-        data = data + str(img_base64)
+        data = data + str(rcv_img_base64)
+        print(parameter)
         udp = udpsend()
         udp.send(data=data)
     return render(request,'magic_circle/upload.html')
 
 
 def get_parameter(img):
-    circle_img_path = "D:\DjangoProject\ShibaLab\media\images\circle.png"
+    circle_img_path = "D:\DjangoProject\ShibaLab\media\images\circle2.png"
     circle_img = cv2.imread(circle_img_path,0)
-    img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    diff_img = cv2.absdiff(img_grey,circle_img)
+    #img_grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    print(img.shape)
+    print(circle_img.shape)
+    diff_img = cv2.absdiff(img,circle_img)
     diff_img = np.float32(diff_img)
     #Harrisのコーナー検出
     corners = detect_corner(diff_img)
@@ -55,7 +59,7 @@ def get_parameter(img):
     if circles is not None and len(circles) > 0:
         circles_num = len(circles[0])
 
-    #画像描画
+    # 画像描画
     # img[corners] = [0,0,255]
     # if lines is not None and len(lines) > 0:
     #     for line in lines:
@@ -70,8 +74,8 @@ def get_parameter(img):
     # cv2.waitKey(0)
     # cv2.destroyAllWindows()
 
-    lines_num = int(lines_num / 2)
-    corners_num = int(corners_num/8 - lines_num)
+    # lines_num = lines_num
+    # corners_num = int(corners_num/8 - lines_num)
     parameter = [corners_num, lines_num, circles_num]
     return parameter
 
