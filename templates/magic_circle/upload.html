@@ -3,6 +3,8 @@
 <head>
     {% load static %}
     <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
     <link rel="stylesheet" href={% static 'css/style.css' %}>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
     <script src={% static 'js/sketch.js' %}></script>
@@ -12,12 +14,9 @@
 
 <body>
     {%csrf_token%}
-    <div class="container" id="myContainer">
-        <h1>MagicCircle</h1>
-        <div id="canvas"></div>
-        <div id="slider"></div>
-        <div id="reset"></div>
-        <div id="option"></div>
-        <div id="upload""></div>
-    </div>
+    <div id="canvas" class="py-2 pl-auto"></div>
+    <div id="slider" class="py-4   m-0"></div>
+    <div id="reset" class="py-4  m-0"></div>
+    <div id="option" class="py-4 m-0"></div>
+    <div id="upload" class="pt-3 pb-5 m-0"></div>
 </body>
