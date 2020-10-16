@@ -1,14 +1,54 @@
-h1 {
-    color: blue;
-}
-
-/* html {
-    width: 600px;
+div {
+    background-color: black;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    width: 700px;
-    height: 700px;
-} */
+    background-color: black;
+    height: auto;
+}
+
+#canvas {
+    padding-left: 8%;
+}
+
+#slider {
+    padding-left: 32%;
+}
+
+#reset {
+    padding-left: 43%;
+}
+
+#option {
+    padding-left: 39%;
+}
+
+#upload {
+    padding-left: 39%;
+}
+
+#clear-button {
+    background-color: rgb(104, 12, 224);
+    color: aliceblue;
+    border-radius: 5px;
+    border-style: none;
+    padding: 5px 15px;
+}
+
+#upload-button {
+    background-color: rgb(104, 12, 224);
+    color: aliceblue;
+    border-radius: 5px;
+    border-style: none;
+    padding: 10px 30px;
+}
+
+#radio-button {
+    color: aliceblue;
+}
+
+
+
+label{
+    padding: 0 10px;
+}

@@ -12,26 +12,30 @@ function setup() {
     frameRate(60);
     background(0);
     //全消去ボタン
-    const clearButton = createButton("reset");
+    const clearButton = createButton("clear");
     clearButton.mousePressed(clearCanvas);
     // clearButton.position(0, 40);
     clearButton.parent('reset');
+    clearButton.id('clear-button')
     //太さスライダー
     thicknessSlider = createSlider(0, 10, 5);
     // thicknessSlider.position(50, 15);
     thicknessSlider.parent('slider');
+    thicknessSlider.id('thick-slider')
     //ラジオボタン
     penOrEraserRadio = createRadio();
     penOrEraserRadio.option('pen');
     penOrEraserRadio.option('eraser');
-    penOrEraserRadio.style('width', '100px');
+    penOrEraserRadio.style('width', '200px');
+    penOrEraserRadio.id('radio-button')
     // penOrEraserRadio.position(340, 10);
     penOrEraserRadio.selected('pen');
     penOrEraserRadio.parent('option');
     //保存ボタン
-    const uploadButton = createButton('Upload');
+    const uploadButton = createButton('Activate');
     uploadButton.mousePressed(upload);
     uploadButton.parent('upload');
+    uploadButton.id('upload-button')
 
     //初期化描画
     initDraw();
@@ -104,3 +108,10 @@ function save() {
     a.click();
 }
 
+window.onload = function no_scroll() {
+    document.addEventListener("touchmove",scrroll_control,{passive:false});
+}
+
+function scrroll_control(event){
+    event.preventDefault();
+}
