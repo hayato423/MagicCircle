@@ -12,7 +12,7 @@ function setup() {
     frameRate(60);
     background(0);
     //全消去ボタン
-    const clearButton = createButton("celar");
+    const clearButton = createButton("clear");
     clearButton.mousePressed(clearCanvas);
     // clearButton.position(0, 40);
     clearButton.parent('reset');

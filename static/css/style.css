@@ -28,14 +28,16 @@ body {
 }
 
 #clear-button {
-    background-color: rgb(224, 157, 12);
+    background-color: rgb(104, 12, 224);
+    color: aliceblue;
     border-radius: 5px;
     border-style: none;
     padding: 5px 15px;
 }
 
 #upload-button {
-    background-color: rgb(224, 157, 12);
+    background-color: rgb(104, 12, 224);
+    color: aliceblue;
     border-radius: 5px;
     border-style: none;
     padding: 10px 30px;
