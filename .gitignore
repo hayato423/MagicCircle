@@ -1,5 +1,4 @@
 *.sqlite3
-*.png
 *.jpg
 
 */__pycache__
